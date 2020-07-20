@@ -1,0 +1,48 @@
+<div class="container">
+  <h1>Most starred Github repos of last 30 days</h1>
+  <div class="search-results" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50"
+    (scrolled)="onScroll()">
+    <div class="row pt-5">
+      <div class="col-md-12 p-2" *ngFor="let repo of repos">
+        <div class="card">
+          <div class="row justify-content-left">
+            <div class="col-1">
+              <img class="avatar" src="{{repo.owner.avatar_url}}">
+            </div>
+            <div class="col-11">
+              <div class="card-body">
+                <h5 class="card-title">{{repo.name}}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{repo.description}}</h6>
+                <div class="row justify-content-left">
+                  <div class="col-2">
+                    <h6>Stars <span class="badge badge-secondary">{{(repo.stargazers_count/1000).toFixed(1)}}k</span>
+                    </h6>
+                  </div>
+                  <div class="col-2">
+                    <h6>Open issues <span class="badge badge-secondary">{{repo.open_issues_count}}</span></h6>
+                  </div>
+                  <div class="col-8">
+                    <p class="card-text">Submitted 30 days ago by {{repo.owner.login}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- spinner -->
+  <div class="row pb-5">
+    <div class="col-md-12 p-5">
+      <ngx-spinner bdOpacity=0.9 bdColor="" size="default" color="#581f87" type="ball-pulse-sync" [fullScreen]="false">
+      </ngx-spinner>
+    </div>
+  </div>
+  <!-- Alert no more post -->
+  <div *ngIf="!notEmptyPost" class="row pb-5">
+    <div class="col-md-12 d-flex justify-content-center">
+      <div class="text-muted h6 alert alert-secondary p-2">No more items to show</div>
+    </div>
+  </div>
+</div>
